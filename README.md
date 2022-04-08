@@ -3,10 +3,9 @@
 Encrypted secrets (for small teams), and scripts to read and update them.
 
 These scripts are very thin wrappers around [`age`][age],
-which replaces GnuPG as a [simpler, better][latacora] encryption tool.
+which replaces GnuPG as a [simpler, better](#why-not-gpg-pass-or-gopass) encryption tool.
 
 [age]: https://github.com/FiloSottile/age
-[latacora]: https://latacora.micro.blog/2019/07/16/the-pgp-problem.html#encrypting-files
 
 ## Use cases
 
@@ -85,8 +84,7 @@ It wouldn’t provide meaningful security:
 
 [githubkeys]: https://github.com/FiloSottile/age#encrypting-to-a-github-user
 
-age has that [cute feature][githubkeys]
-(because it also supports encrypting using SSH keys):
+age has that [cute feature][githubkeys] (because it also supports SSH keys):
 
 ```bash
 $ curl https://github.com/benjojo.keys | age -R - example.jpg >example.jpg.age
@@ -101,15 +99,17 @@ hacker handles instead of clean, predictable enterprise usernames.
 
 ### About alternatives
 
-#### Why not gpg, gopass or pass?
+#### Why not [gpg][], [pass][], or [gopass][]?
 
-[gopass]: https://github.com/gopasspw/gopass
+[gpg]: https://gnupg.org/
 [pass]: https://www.passwordstore.org/
+[gopass]: https://github.com/gopasspw/gopass
 
-Both [gopass][] and [pass][] rely on GPG for encryption, and GPG [is][schneier]
-[very][latacora] [bad][green].
+Both pass and gopass rely on GPG for encryption, and GPG [is][schneier]
+[pretty][latacora] [bad][green].
 
 [schneier]: https://www.schneier.com/blog/archives/2016/12/giving_up_on_pg.html
+[latacora]: https://latacora.micro.blog/2019/07/16/the-pgp-problem.html#encrypting-files
 [green]: https://blog.cryptographyengineering.com/2014/08/13/whats-matter-with-pgp/
 
 Also, my `gpg --list-secret-keys` says I should be able to decrypt things,
@@ -125,7 +125,7 @@ features compared to age alone.)
 
 [passage]: https://github.com/FiloSottile/passage
 
-#### Why not SOPS?
+#### Why not [SOPS][]?
 
 [sops]: https://github.com/mozilla/sops
 
