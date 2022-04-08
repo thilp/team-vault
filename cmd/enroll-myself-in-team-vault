@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
+DIR="$(cd $(dirname "$0")/.. && pwd)"
+
+ID="$DIR/.my-secret-identity"
+TEAM_FILE="$DIR/team.identities"
+
+if grep -q "^# $(whoami)$" "$TEAM_FILE"; then
+    echo "$(whoami): Already listed in $(basename "$TEAM_FILE"), skipping."
+    exit 1
+fi
+
+# Insert username & public key in $TEAM_FILE.
+age-keygen --output "$ID"
+echo -e "\n# $(whoami)" >>"$TEAM_FILE"
+age-keygen -y "$ID" >>"$TEAM_FILE"
