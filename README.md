@@ -1,15 +1,16 @@
 # team-vault
 
-Encrypted secrets (for small teams), and scripts to read and update them.
-
-These scripts are very thin wrappers around [`age`][age],
-which replaces GnuPG as a [simpler, better](#why-not-gpg-pass-or-gopass) encryption tool.
+Using [`age`][age] to protect & share secrets across a small team.
 
 [age]: https://github.com/FiloSottile/age
 
-## Use cases
+- age replaces GnuPG as a [simpler, better](#why-not-gpg-pass-or-gopass) encryption tool.
+- The scripts offered here are very thin wrappers around age,
+    only concerned with improving user experience for specific use-cases.
 
-### Join the team
+## How to
+
+### Join an existing vault
 
 For this operation, you need an already-enrolled colleague.
 
@@ -20,11 +21,11 @@ For this operation, you need an already-enrolled colleague.
     - It displays your public key, but you don’t need to remember it.
     - It adds your public key to `teams.identities`, which lists everyone
         for whom the secrets in this vault are encrypted.
-    - Please take the opportunity to open `team.identities` and remove
+    - Take the opportunity to open `team.identities` and remove
         the keys of people who have left the team.
 3. Publish your changes (no need for a pull request yet):
     - `git add team.identities && git commit -m 'adding my public key' && git push origin YOUR_NAME`.
-4. Ask **someone else** in the team to:
+4. Ask your colleague to:
     1. Pull your changes: `git fetch && git checkout YOUR_NAME && git diff main`.
     2. Run `./cmd/reencrypt-all-team-secrets SECRET_DIRECTORY`.
     3. Commit, push, review, and merge.
@@ -55,8 +56,7 @@ $  echo "secret!" | ./cmd/upsert-team-secret secrets/some-file
 ```
 
 You can also simply provide the secret value after starting the command.
-Enter the value (nothing will be printed) followed by a newline and Ctrl-D
-to finish:
+Enter the value followed by a newline and Ctrl-D to finish:
 
 ```bash
 $ ./cmd/upsert-team-secret secrets/some-file
@@ -65,10 +65,16 @@ $ ./cmd/upsert-team-secret secrets/some-file
 
 ### Create a completely new vault
 
-1. Copy the contents of this repository wherever you need: `cp -r cmd/ .gitignore README.md /your/repo`.
-2. Move there: `cd /your/repo`.
-3. Run `./cmd/enroll-myself-in-team-vault`.
-4. Start encrypting things with `./cmd/upsert-team-secret`.
+1. [Install `age`](https://github.com/FiloSottile/age#installation).
+2. Move in the directory that will be your vault.
+3. Copy the scripts and supporting files from this repository:
+
+    ```bash
+    curl -L https://github.com/thilp/team-vault/tarball/main | tar -xz --strip-components=1
+    ```
+
+4. Run `./cmd/enroll-myself-in-team-vault`.
+4. Start encrypting things with [`upsert-team-secret`](#create-or-update-a-secret).
 5. Commit and push all the changed files to your git server.
 
 ## FAQs
