@@ -162,3 +162,47 @@ with an AWS IAM setup that may be as tedious or even impossible to achieve.
 Where I work, the exclusive reliance on AWS roles and the central provisioning
 of these makes it impossible for us to have a KMS key usable only by members of
 our team.
+
+#### Why not Google Docs?
+
+One big file, no encryption to deal with, and access control managed at the
+individual or team level.
+It’s searchable and versioned just like our git repository, and it’s trivially
+cross-platform.
+Sounds great!
+You can even appeal to your Google admins to get the secrets back if somehow
+everyone loses access.
+
+Downsides:
+
+- It’s all online, so you can’t use it without internet access.
+    But most secrets would probably be useless (to you) in that case anyway;
+    hence likely not a real issue.
+- If Google Docs is down, you can’t access your secrets.
+    They have an availability SLA of [99.9%][google-sla]
+    (allowing for around 9 hours of downtime per year), which many teams could
+    consider acceptable for that use-case, and others wouldn’t.
+- If someone’s Google account gets compromised and they have access to the
+    document containing all secrets, these secrets are compromised too.
+    This is similar to that person instead using gpg/age and having their
+    laptop (filesystem) compromised.
+    Both cases seem unlikely given the enforcement of multi-factor
+    authentication in Google accounts, and of typical enterprise security
+    measures in laptops (plus the effort of deploying malware or physical presence).
+    I don’t know how much more likely each is compared to the other.
+    If your laptop is compromised, so too is your Google account, probably?
+- **Either all editors of the document can share it further, or only the owner can.**
+    **And there is no (easily accessible) record of with whom it was shared when.**
+    This is for me a clear disadvantage compared to git-backed methods:
+
+    - If all editors can share (the default), then a single rogue editor
+      can add anyone else to the list and no-one notices for a long time.
+    - If only the owner can share, they’re a single point of failure and
+      any availability on their side translates in delays.
+      And the owner can still be rogue (see above).
+    - If a few people are editors (and can share) while the rest of the
+      team can only view/comment, you still have (fewer) points of failures
+      but you’ve also created a probably-unwelcome "hierarchy of trust" in
+      your team.
+
+[google-sla]: https://workspace.google.com/terms/sla.html
