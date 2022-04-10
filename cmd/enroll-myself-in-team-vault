@@ -13,6 +13,9 @@ if grep -q "^# $(whoami)$" "$TEAM_FILE"; then
 fi
 
 # Insert username & public key in $TEAM_FILE.
-age-keygen --output "$ID"
+# Reuse existing $ID if any.
+if ! [[ -e $ID ]]; then
+    age-keygen --output "$ID"
+fi
 echo -e "\n# $(whoami)" >>"$TEAM_FILE"
 age-keygen -y "$ID" >>"$TEAM_FILE"
