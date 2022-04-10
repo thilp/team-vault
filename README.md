@@ -26,7 +26,7 @@ For this operation, you need an already-enrolled colleague.
     - `git add team.identities && git commit -m 'adding my public key' && git push origin YOUR_NAME`.
 4. Ask **someone else** in the team to:
     1. Pull your changes: `git fetch && git checkout YOUR_NAME && git diff main`.
-    2. Run `./cmd/reencrypt-all-team-secrets`.
+    2. Run `./cmd/reencrypt-all-team-secrets SECRET_DIRECTORY`.
     3. Commit, push, review, and merge.
 
 You can optionally add `./cmd` to your path
