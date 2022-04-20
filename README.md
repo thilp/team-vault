@@ -112,10 +112,11 @@ hacker handles instead of clean, predictable enterprise usernames.
 [gopass]: https://github.com/gopasspw/gopass
 
 Both pass and gopass rely on GPG for encryption, and GPG [is][schneier]
-[pretty][latacora] [bad][green].
+[really][latacora] [pretty][signify] [bad][green].
 
 [schneier]: https://www.schneier.com/blog/archives/2016/12/giving_up_on_pg.html
 [latacora]: https://latacora.micro.blog/2019/07/16/the-pgp-problem.html#encrypting-files
+[signify]: https://www.openbsd.org/papers/bsdcan-signify.html
 [green]: https://blog.cryptographyengineering.com/2014/08/13/whats-matter-with-pgp/
 
 Also, my `gpg --list-secret-keys` says I should be able to decrypt things,
