@@ -73,6 +73,14 @@ $ .cmd/edit-team-secret secrets/some-file
 
 The secret is updated when you exit your editor.
 
+#### Warning
+Your `$EDITOR` might create some temporary files with the decrypted content.
+Please refer to your editor's documentation for how to disable that behaviour
+and other best practices. The following is a non exhaustive list of recommendations:
+
+- [vim](https://vim.fandom.com/wiki/Encryption)
+- nano: set `$EDITOR` to `nano -R`
+
 
 ### Create a completely new vault
 
