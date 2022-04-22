@@ -63,6 +63,17 @@ $ ./cmd/upsert-team-secret secrets/some-file
    # ← blank line waiting for your input
 ```
 
+### Editing a secret
+
+To edit a secret with your default $EDITOR use `./cmd/edit-team-secret`:
+
+```bash
+$ .cmd/edit-team-secret secrets/some-file
+```
+
+The secret is updated when you exit your editor.
+
+
 ### Create a completely new vault
 
 1. [Install `age`](https://github.com/FiloSottile/age#installation).
