@@ -68,7 +68,7 @@ $ ./cmd/upsert-team-secret secrets/some-file
 To edit a secret with your default $EDITOR use `./cmd/edit-team-secret`:
 
 ```bash
-$ .cmd/edit-team-secret secrets/some-file
+$ ./cmd/edit-team-secret secrets/some-file
 ```
 
 The secret is updated when you exit your editor.

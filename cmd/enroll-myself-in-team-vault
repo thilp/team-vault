@@ -7,7 +7,7 @@ DIR="$(cd $(dirname "$0")/.. && pwd)"
 ID="$DIR/.my-secret-identity"
 TEAM_FILE="$DIR/team.identities"
 
-if grep -q "^# $(whoami)$" "$TEAM_FILE"; then
+if grep -q -s "^# $(whoami)$" "$TEAM_FILE"; then
     echo "$(whoami): Already listed in $(basename "$TEAM_FILE"), skipping."
     exit 1
 fi
