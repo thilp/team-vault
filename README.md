@@ -63,24 +63,27 @@ $ ./cmd/upsert-team-secret secrets/some-file
    # ← blank line waiting for your input
 ```
 
-### Editing a secret
+### Change a secret in an editor
 
-To edit a secret with your default $EDITOR use `./cmd/edit-team-secret`:
+Use **edit-team-secret** to open a decrypted secret in a text editor
+and write the edited value back in the same encrypted file:
 
 ```bash
-$ .cmd/edit-team-secret secrets/some-file
+$ ./cmd/edit-team-secret secrets/some-file
 ```
 
-The secret is updated when you exit your editor.
+The default editor is nano (if available) or vi.
+You can use a **different editor** by setting your shell’s `SECRET_EDITOR`
+environment variable.
+For example, if you want to edit your secrets with Visual Studio Code,
+set `SECRET_EDITOR` to `code --wait --user-data-dir /tmp`
+(`--wait` avoids the command returning immediately,
+and `--user-data-dir /tmp` ensures any backup file containing your decrypted
+secrets won’t stay on your filesystem beyond reboot):
 
-#### Warning
-Your `$EDITOR` might create some temporary files with the decrypted content.
-Please refer to your editor's documentation for how to disable that behaviour
-and other best practices. The following is a non exhaustive list of recommendations:
-
-- [vim](https://vim.fandom.com/wiki/Encryption)
-- nano: set `$EDITOR` to `nano -R`
-
+- bash: `echo 'export SECRET_EDITOR="code --wait --user-data-dir /tmp"' >>~/.bash_profile`
+- zsh (macOS): `echo 'export SECRET_EDITOR="code --wait --user-data-dir /tmp"' >>~/.zprofile`
+- fish: `set -U SECRET_EDITOR 'code --wait --user-data-dir /tmp'`
 
 ### Create a completely new vault
 
