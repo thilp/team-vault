@@ -72,9 +72,14 @@ and write the edited value back in the same encrypted file:
 $ ./cmd/edit-team-secret secrets/some-file
 ```
 
-The default editor is nano (if available) or vi.
+The default editor is nano (if available) or vi, both with secure defaults.
+
 You can use a **different editor** by setting your shell’s `SECRET_EDITOR`
-environment variable.
+environment variable; make sure you disable that editor’s various backup features!
+If you don’t, your unencrypted secrets might turn up by surprise, probably
+while you’re sharing your screen during a `grep` search or some other
+embarrassing situation.
+
 For example, if you want to edit your secrets with Visual Studio Code,
 set `SECRET_EDITOR` to `code --wait --user-data-dir /tmp`
 (`--wait` avoids the command returning immediately,
