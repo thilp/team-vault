@@ -30,8 +30,8 @@ For this operation, you need an already-enrolled colleague.
     2. Run `./cmd/reencrypt-all-team-secrets SECRET_DIRECTORY`.
     3. Commit, push, review, and merge.
 
-You can optionally add `./cmd` to your path
-(to avoid having to `cd` here before reading/writing secrets).
+You can optionally **add `./cmd` to your path**
+(makes it easier reading/writing secrets).
 Depending on your shell, run:
 
 - bash: `echo "export PATH=\"\$PATH:$(pwd)/cmd\"" >>~/.bash_profile`
